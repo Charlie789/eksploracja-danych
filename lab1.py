@@ -1,9 +1,11 @@
 import pandas as pd
+import requests
 
 from collections import Counter
 from github import Github
 from matplotlib import pyplot as plt
 from os import environ
+from datetime import datetime
 
 
 def zad1():
@@ -69,7 +71,34 @@ def zad3():
     plt.show()
 
 
+# Lepiej zrobić to przy pomocy aiohttp aby nie blokować aplikacji
+# Ale na potrzeby tego zadania - aby było zgodnie z poleceniem - wystarczy zwykły request
+def zad4():
+    url = 'https://api.openweathermap.org/data/2.5/onecall?' \
+          'lat=53.1432738&' \
+          'lon=18.1287219&' \
+          'exclude=minutely,hourly,alerts&' \
+          'units=metric&' \
+          f'appid={environ["WEATHER_API"]}'
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        current = data['current']
+        date = datetime.fromtimestamp(current['dt']).strftime('%d.%m.%Y %H:%M')
+        temp = current['temp']
+        daily_temp = data['daily'][0]['temp']
+        temp_tomorrow_day = daily_temp['day']
+        temp_tomorrow_night = daily_temp['night']
+        print(f'Data: {date}')
+        print(f'Temperatura: {temp} C')
+        print(f'Jutro: {temp_tomorrow_day}C / {temp_tomorrow_night}C')
+    else:
+        print(f"Błąd zapytania: {response.json()}")
+        return
+
+
 if __name__ == '__main__':
     zad1()
     zad2()
     zad3()
+    zad4()
