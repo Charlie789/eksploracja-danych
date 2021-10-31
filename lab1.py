@@ -1,5 +1,6 @@
 import pandas as pd
 import requests
+import wget
 
 from collections import Counter
 from github import Github
@@ -7,11 +8,11 @@ from matplotlib import pyplot as plt
 from os import environ, path
 from datetime import datetime
 
-import wget
+from helper_functions import exercise
 
 
+@exercise
 def zad1():
-    print('****** ZAD 1 ******')
     netflix_path = 'dane/netflix_titles.csv'
     if not path.isfile(netflix_path):
         print(f'Brak pliku {netflix_path}, należy go pobrać z https://www.kaggle.com/shivamb/netflix-shows?select=netflix_titles.csv')
@@ -21,9 +22,9 @@ def zad1():
     print(f'Ilość wczytanych wierszych: {len(df)}')
     print(f'Wymiar (kolumny x indeksy): {df.shape[1]}x{df.shape[0]}')
     print(f'Ilość pustych wartości:\n{df.isna().sum()}')
-    print('\n')
 
 
+@exercise
 def zad2():
     titanic_path = 'dane/titanic.csv'
     if not path.isfile(titanic_path):
@@ -41,7 +42,6 @@ def zad2():
         empty_dict[column] = [part_sum, cum_sum, empty_percentage]
     empty = pd.DataFrame.from_dict(empty_dict, orient='index', columns=['Ilość pustych', 'Suma skumulowana', 'Procent pustych'])
 
-    print('****** ZAD 2 ******')
     print(df)
     print(f'Ilość wczytanych wierszych: {len(df)}')
     print(f'Ilość pustych wartości: {df.isna().sum().sum()}')
@@ -57,11 +57,9 @@ def zad2():
     df.replace(to_replace={'female': 0, 'male': 1}, inplace=True)
     print(df)
 
-    print('\n')
 
-
+@exercise
 def zad3():
-    print('****** ZAD 3 ******')
     try:
         git = Github(environ['GH_ACCESS'])
     except KeyError:
@@ -83,13 +81,12 @@ def zad3():
     fig = plt.figure(figsize=(10, 7))
     plt.pie(langs_counter.values(), labels=langs_counter.keys())
     plt.show()
-    print('\n')
 
 
 # Lepiej zrobić to przy pomocy aiohttp aby nie blokować aplikacji
 # Ale na potrzeby tego zadania - aby było zgodnie z poleceniem - wystarczy zwykły request
+@exercise
 def zad4():
-    print('****** ZAD 4 ******')
     try:
         app_id = environ["WEATHER_API"]
     except KeyError:
