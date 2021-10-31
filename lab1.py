@@ -51,10 +51,14 @@ def zad2():
 
 
 def zad3():
-    git = Github(environ['GH_ACCESS'])
+    print('****** ZAD 3 ******')
+    try:
+        git = Github(environ['GH_ACCESS'])
+    except KeyError:
+        print('Brak zmiennej środowiskowej "GH_ACCESS" z kluczem do github')
+        return
     user = git.get_user('MikiKru')
     repos = user.get_repos()
-    print('****** ZAD 3 ******')
     print(f'Liczba projektów: {repos.totalCount}')
     print('Trwa pobieranie języków z repozytorium...')
     try:
@@ -69,17 +73,24 @@ def zad3():
     fig = plt.figure(figsize=(10, 7))
     plt.pie(langs_counter.values(), labels=langs_counter.keys())
     plt.show()
+    print('\n')
 
 
 # Lepiej zrobić to przy pomocy aiohttp aby nie blokować aplikacji
 # Ale na potrzeby tego zadania - aby było zgodnie z poleceniem - wystarczy zwykły request
 def zad4():
+    print('****** ZAD 4 ******')
+    try:
+        app_id = environ["WEATHER_API"]
+    except KeyError:
+        print('Brak zmiennej środowiskowej "WEATHER_API" z kluczem do weather api')
+        return
     url = 'https://api.openweathermap.org/data/2.5/onecall?' \
           'lat=53.1432738&' \
           'lon=18.1287219&' \
           'exclude=minutely,hourly,alerts&' \
           'units=metric&' \
-          f'appid={environ["WEATHER_API"]}'
+          f'appid={app_id}'
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
