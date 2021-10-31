@@ -4,14 +4,20 @@ import requests
 from collections import Counter
 from github import Github
 from matplotlib import pyplot as plt
-from os import environ
+from os import environ, path
 from datetime import datetime
+
+import wget
 
 
 def zad1():
-    df = pd.read_csv('dane/netflix_titles.csv', index_col='show_id')
-
     print('****** ZAD 1 ******')
+    netflix_path = 'dane/netflix_titles.csv'
+    if not path.isfile(netflix_path):
+        print(f'Brak pliku {netflix_path}, należy go pobrać z https://www.kaggle.com/shivamb/netflix-shows?select=netflix_titles.csv')
+        return
+    df = pd.read_csv(netflix_path, index_col='show_id')
+
     print(f'Ilość wczytanych wierszych: {len(df)}')
     print(f'Wymiar (kolumny x indeksy): {df.shape[1]}x{df.shape[0]}')
     print(f'Ilość pustych wartości:\n{df.isna().sum()}')
@@ -19,7 +25,11 @@ def zad1():
 
 
 def zad2():
-    df = pd.read_csv('dane/titanic.csv')
+    titanic_path = 'dane/titanic.csv'
+    if not path.isfile(titanic_path):
+        print(f'Brak pliku {titanic_path}, pobieranie')
+        wget.download('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/titanic.csv', titanic_path)
+    df = pd.read_csv(titanic_path)
     pd.set_option('display.max_columns', None)
 
     cum_sum = 0
