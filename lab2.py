@@ -5,9 +5,11 @@ from sklearn.datasets import load_breast_cancer
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.decomposition import PCA
 
+from helper_functions import exercise
 
+
+@exercise
 def zad1(df):
-    print('***** ZAD 1 *****')
     pd.set_option('display.max_columns', None)
     print(f'Wymiar (kolumny x indeksy): {df.shape[1]}x{df.shape[0]}')
     print(f'Liczba unikalnych wartości w wektorze "target": {len(numpy.unique(cancer.target))}')
@@ -17,11 +19,10 @@ def zad1(df):
     dropped_features = df.columns.values[variances < 0.05]
     print(f'Kolumny nadające się do usunięcia, których treshold jest mniejszy od 0.05: \n{dropped_features}')
     df.to_csv(sep=';', path_or_buf='dane/breast.csv')
-    print()
 
 
+@exercise
 def zad2(df):
-    print('***** ZAD 2 *****')
     n_components = 5
     pca = PCA(n_components=n_components)
     processed_data = pca.fit_transform(df)
