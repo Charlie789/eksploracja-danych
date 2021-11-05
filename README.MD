@@ -9,3 +9,6 @@ Wymagane:
 2. Pliki (umieścić w katalogu `dane`):
 - [netflix_titles.csv](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/titanic.csv)
 - [titanic.csv](https://www.kaggle.com/shivamb/netflix-shows?select=netflix_titles.csv)
+
+## Laboratorium 2
+Brak specjalnych wymagań
