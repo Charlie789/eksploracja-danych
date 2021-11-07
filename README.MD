@@ -12,3 +12,8 @@ Wymagane:
 
 ## Laboratorium 2
 Brak specjalnych wymagań
+
+## Laboratorium 3
+Wymagane:
+1. Pliki (umieścić w katalogu `dane`):
+- [Sales_Transactions_Dataset_Weekly.csv](http://archive.ics.uci.edu/ml/machine-learning-databases/00396/Sales_Transactions_Dataset_Weekly.csv)
