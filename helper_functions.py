@@ -1,6 +1,7 @@
 def exercise(ex):
     def inner(*args):
         print(f'******* {ex.__name__.upper()} *******')
-        ex(*args)
+        return_value = ex(*args)
         print()
+        return return_value
     return inner
