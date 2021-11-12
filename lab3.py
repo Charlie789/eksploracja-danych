@@ -68,6 +68,20 @@ def zad2(clusters, data):
     plt.show()
 
 
+@exercise
+def zad4(data):
+    wcss = []
+    for i in range(2, 16):
+        kmeans = KMeans(n_clusters=i, init='k-means++', max_iter=300, n_init=10, random_state=0)
+        kmeans.fit(data)
+        wcss.append(kmeans.inertia_)
+    plt.plot(range(2, 16), wcss)
+    plt.title('Elbow Method')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('WCSS')
+    plt.show()
+
+
 def prepare_parser():
     parser = argparse.ArgumentParser(
         description='sum the integers at the command line')
@@ -82,3 +96,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     data = zad1()
     zad2(args.clusters, data)
+    zad4(data)
