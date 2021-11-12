@@ -20,13 +20,16 @@ def zad1_2(clusters):
         return
     df = pd.read_csv(data_path, index_col='Product_Code')
     print(f'Wczytano {data_path}')
+    # Dane zawierają kolumny użyteczne w tym zadaniu W0-W51, oraz niepotrzebne na poczet tego zadania - MIN, MAX oraz znormalizowane
     df = df.iloc[:, :52]
     print('Pozostawiono tylko kolumny W0-W51')
+    # Pozostałe kolumny należy przeskalować, aby mozna było użyć algorytmu PCA
     scaler = StandardScaler()
     scaled_features = pd.DataFrame(scaler.fit_transform(df))
     scaled_features.columns = df.columns
     print('Przeskalona wartości przy pomocy StandardScaler')
 
+    # Użycie algorytmu PCA, aby zmniejszyć wymiarowość danych
     pca = PCA(n_components=2)
     processed_data = pca.fit_transform(scaled_features)
     processed_df = pd.DataFrame(data=processed_data, columns=[f'COMP{i}' for i in range(processed_data.shape[1])])
