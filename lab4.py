@@ -46,10 +46,10 @@ def zad1():
 
     print('Trwa ładowanie danych...')
     global x_train, y_train, x_test, y_test
-    x_train = pd.read_csv(path_x_train, delimiter=' ')
-    y_train = pd.read_csv(path_y_train, delimiter=' ')
-    x_test = pd.read_csv(path_x_test, delimiter=' ')
-    y_test = pd.read_csv(path_y_test, delimiter=' ')
+    x_train = pd.read_csv(path_x_train, delimiter=' ', header=None)
+    y_train = pd.read_csv(path_y_train, delimiter=' ', header=None)
+    x_test = pd.read_csv(path_x_test, delimiter=' ', header=None)
+    y_test = pd.read_csv(path_y_test, delimiter=' ', header=None)
     print('Załadowane pomyślnie dane')
 
 
