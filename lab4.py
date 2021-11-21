@@ -5,6 +5,7 @@ from os import path
 
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_validate
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 from sklearn.tree import DecisionTreeClassifier
@@ -101,9 +102,27 @@ def zad3():
     print_scores(y_pred_forest, "Random Forest")
 
 
+@exercise
+def zad4():
+    def make_cross_validation(model, name):
+        print(f"--{name}--")
+        print("Trwa przetwarzanie kros-walidacji...")
+        validation = cross_validate(model, x_train, y_train, cv=5)
+        average = np.average(validation["test_score"])
+        std_deviation = np.std(validation["test_score"])
+        print(f"Kros-walidacja: {validation}")
+        print(f"Średni wynik: {average}")
+        print(f"Odchylenie standardowe: {std_deviation}")
+        print()
+
+    make_cross_validation(model_knn, "KNN")
+    make_cross_validation(model_svc, "SVC")
+    make_cross_validation(model_tree, "Decision Tree")
+    make_cross_validation(model_forest, "Random Forest")
 
 
 if __name__ == '__main__':
     zad1()
     zad2()
     zad3()
+    zad4()
