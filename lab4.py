@@ -74,8 +74,8 @@ def zad2():
 
     # Decision Tree
     print("Przygotowywanie modelu Decision Tree...")
-    forest = DecisionTreeClassifier()
-    model_tree = forest.fit(x_train, y_train.values.ravel())
+    tree = DecisionTreeClassifier()
+    model_tree = tree.fit(x_train, y_train.values.ravel())
     y_pred_tree = model_tree.predict(x_test)
     print("Przygotowano model Decision Tree")
 
