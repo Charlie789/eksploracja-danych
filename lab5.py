@@ -4,11 +4,12 @@ import numpy as np
 from os import path
 
 from sklearn import svm
-from sklearn.ensemble import VotingClassifier, BaggingClassifier
+from sklearn.ensemble import VotingClassifier, BaggingClassifier, AdaBoostClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_validate
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report
+from xgboost import XGBClassifier
 
 from helper_functions import exercise
 
@@ -74,6 +75,17 @@ def zad3():
     )
 
 
+@exercise
+def zad4():
+    ada = AdaBoostClassifier()
+    xg = XGBClassifier()
+
+    _generate_excel_report(
+        [ada, xg],
+        'dane/boosting.xlsx'
+    )
+
+
 def _generate_excel_report(clasifiers_list, out_name, clf_names=None):
     output = {}
     for i, clf in enumerate(clasifiers_list):
@@ -113,3 +125,4 @@ if __name__ == '__main__':
     zad1()
     zad2()
     zad3()
+    zad4()
