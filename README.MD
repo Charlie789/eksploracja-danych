@@ -22,3 +22,8 @@ Wymagane:
 Wymagane:
 1. Pliki (umieścić w katalogu `dane`):
 - X_train.txt, y_train.txt, X_test.txt, y_test.txt z [Smartphone-Based Recognition of Human Activities and Postural Transitions Data Set](https://archive.ics.uci.edu/ml/datasets/Smartphone-Based+Recognition+of+Human+Activities+and+Postural+Transitions)
+
+## Laboratorium 5
+Wymagane:
+1. Pliki (umieścić w katalogu `dane`):
+- Takie same jak w Laboratorium 4 - X_train.txt, y_train.txt, X_test.txt, y_test.txt z [Smartphone-Based Recognition of Human Activities and Postural Transitions Data Set](https://archive.ics.uci.edu/ml/datasets/Smartphone-Based+Recognition+of+Human+Activities+and+Postural+Transitions)
