@@ -17,3 +17,8 @@ Brak specjalnych wymagań
 Wymagane:
 1. Pliki (umieścić w katalogu `dane`):
 - [Sales_Transactions_Dataset_Weekly.csv](http://archive.ics.uci.edu/ml/machine-learning-databases/00396/Sales_Transactions_Dataset_Weekly.csv)
+
+## Laboratorium 4
+Wymagane:
+1. Pliki (umieścić w katalogu `dane`):
+- X_train.txt, y_train.txt, X_test.txt, y_test.txt z [Smartphone-Based Recognition of Human Activities and Postural Transitions Data Set](https://archive.ics.uci.edu/ml/datasets/Smartphone-Based+Recognition+of+Human+Activities+and+Postural+Transitions)
