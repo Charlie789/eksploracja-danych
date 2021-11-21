@@ -22,6 +22,8 @@ y_train = None
 x_test = None
 y_test = None
 
+comparison = {}
+
 
 @exercise
 def zad1():
@@ -86,7 +88,20 @@ def zad4():
     )
 
 
+@exercise
+def zad5():
+    out_name = 'dane/comparison.xlsx'
+    output_df = pd.DataFrame.from_dict(
+        comparison,
+        orient='index',
+        columns=['cross-average', 'cross-std', 'ACC', 'Recall', 'F1-score', 'AUC']
+    )
+    output_df.to_excel(out_name)
+    print(f'Raport wygenerowany do pliku: {out_name}')
+
+
 def _generate_excel_report(clasifiers_list, out_name, clf_names=None):
+    global comparison
     output = {}
     for i, clf in enumerate(clasifiers_list):
         if clf_names:
@@ -103,7 +118,7 @@ def _generate_excel_report(clasifiers_list, out_name, clf_names=None):
         average = np.average(validation["test_score"])
         std_deviation = np.std(validation["test_score"])
 
-        output[clf_name] = [
+        comparison[clf_name] = output[clf_name] = [
             average,
             std_deviation,
             accuracy_score(y_test, y_pred),
@@ -126,3 +141,4 @@ if __name__ == '__main__':
     zad2()
     zad3()
     zad4()
+    zad5()
