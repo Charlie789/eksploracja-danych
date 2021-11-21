@@ -4,7 +4,7 @@ import numpy as np
 from os import path
 
 from sklearn import svm
-from sklearn.ensemble import VotingClassifier
+from sklearn.ensemble import VotingClassifier, BaggingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_validate
 from sklearn.neighbors import KNeighborsClassifier
@@ -57,17 +57,41 @@ def zad2():
     _generate_excel_report([knn, lr, svc, voting_ens], 'dane/ensemble_learning.xlsx')
 
 
-def _generate_excel_report(clasifiers_list, out_name):
+@exercise
+def zad3():
+    knn = KNeighborsClassifier()
+    svc = svm.SVC(C=1, kernel='linear')
+    lr = LogisticRegression()
+
+    bagging_knn = BaggingClassifier(base_estimator=knn, n_estimators=5)
+    bagging_svc = BaggingClassifier(base_estimator=svc, n_estimators=5)
+    bagging_lr = BaggingClassifier(base_estimator=lr, n_estimators=5)
+
+    _generate_excel_report(
+        [bagging_knn, bagging_svc, bagging_lr],
+        'dane/aggregation.xlsx',
+        ['Bagging_knn', 'Bagging_svc', 'Bagging_lr']
+    )
+
+
+def _generate_excel_report(clasifiers_list, out_name, clf_names=None):
     output = {}
-    for clf in clasifiers_list:
-        print(f'Generowanie raportu dla {clf.__class__.__name__}...')
+    for i, clf in enumerate(clasifiers_list):
+        if clf_names:
+            clf_name = clf_names[i]
+        else:
+            clf_name = clf.__class__.__name__
+        print(f'Trwa generowanie raportu dla {clf_name}...')
         clf.fit(x_train, y_train)
         y_pred = clf.predict(x_test)
+
         report = classification_report(y_test, y_pred, output_dict=True)
+
         validation = cross_validate(clf, x_train, y_train, cv=5)
         average = np.average(validation["test_score"])
         std_deviation = np.std(validation["test_score"])
-        output[clf.__class__.__name__] = [
+
+        output[clf_name] = [
             average,
             std_deviation,
             accuracy_score(y_test, y_pred),
@@ -88,3 +112,4 @@ def _generate_excel_report(clasifiers_list, out_name):
 if __name__ == '__main__':
     zad1()
     zad2()
+    zad3()
